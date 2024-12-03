@@ -1,0 +1,1 @@
+React typescript study project from skillfactory "28.6. TypeScript" (duplicate). Users table with rating and rating control buttons.
