@@ -1,0 +1,9 @@
+.blockGap{width:100%; height:5px; 
+}
+.tableBlock{
+    height:90vh;overflow-y: scroll;position:relative;
+}
+.tableHeader{background-color: white; 
+  padding-bottom:10px;
+  position:sticky;top:0px;left:0px;z-index:2;
+}
