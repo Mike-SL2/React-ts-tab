@@ -1,0 +1,1 @@
+npx create-react-app tab-71 --template typescript
