@@ -1,0 +1,71 @@
+style.module.css
+------------------
+
+input {
+        outline: none;
+        border:none;
+        background-image:none;
+        background-color:transparent;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+     }
+     
+     .Input {
+        border-bottom: 1px solid;
+        padding: 12px;
+        font-size: 20px;
+        margin-bottom: 12px;
+        vertical-align: center;
+     }
+     
+
+Component\index.tsx
+-------------------
+
+import React, { ChangeEvent, useState} from "react";
+import style from './style.module.css'
+
+const InputString = (): JSX.Element => {
+   const [inputValue, setInputValue] = useState<string>('')
+   const [messege, setMessage] = useState<string | null>(null)
+
+   const handlerChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+       if (messege) {
+           setMessage(null)
+       }
+       setInputValue(event.target.value)
+   }
+
+   const handlerKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+       const { key } = event
+       if (key === 'Enter') {
+           setMessage(inputValue)
+           setInputValue('')
+       }
+   }
+   return (
+       <div>
+           <input
+               placeholder={'enter text here'}
+               className={style.Input}
+               value={inputValue}
+               onChange={handlerChangeInput}
+               onKeyDown={handlerKeyPress}
+           />
+           <div>
+               {
+                   message ? (<div>{`Вы послали вселенной: ${message}`}</div>) :
+                       inputValue ?
+                       (<div>Идет набор текста....</div>) : null
+               }
+           </div>
+       </div>
+   )
+}
+
+export default InputString
+
+(*
+в ответе задания 28.7.6 ошибка: в функции InputString декларируется переменная с именем messege, получающая значение поля ввода в обработчике handlerKeyPress и значение null в обработчике handlerChangeInput; значение переменной с этим же именем считывается в условном операторе внутри обработчика handlerChangeInput, однако внутри возвращаемого функцией InputString значения - разметки HTML (типа JSX.Element) фигурирует переменная с именем message, не задекларированная ранее.
+*)
